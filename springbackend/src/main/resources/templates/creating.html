@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <link rel="stylesheet" href="/css/creating.css">
+    <meta charset="UTF-8">
+    <title>Creating task</title>
+</head>
+
+<body>
+
+<main>
+    <section class="create-task">
+
+        <h1>Put the info of your task!</h1>
+
+        <form id="create-task-form">
+            <div id="maybe-error-div">
+                <label for="task-name" class="tasks-name">Task name:</label>
+                <input type="text" id="task-name" class="tasks-name deleting" required>
+            </div>
+
+            <label for="task-description" class="tasks-description">Task description:</label>
+            <textarea id="task-description" class="tasks-description deleting"></textarea>
+
+            <p>Priority:</p>
+            <select class="priority" required>
+                <option value="VERY-HIGH">Very High</option>
+                <option value="HIGH">High</option>
+                <option value="MEDIUM" selected>Medium</option>
+                <option value="LOW">Low</option>
+                <option value="VERY-LOW">Very low</option>
+            </select>
+
+            <button type="submit" id="apply">Create task</button>
+        </form>
+
+    </section>
+
+</main>
+
+</body>
+<script type="module" src="/js/creating.js"></script>
+</html>

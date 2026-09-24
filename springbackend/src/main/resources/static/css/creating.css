@@ -1,0 +1,16 @@
+#create-task-form {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+#task-description {
+    height: 100px;
+}
+
+.error-input {
+    color: red;
+    border: 2px solid red;
+    border-radius: 5px;
+}
