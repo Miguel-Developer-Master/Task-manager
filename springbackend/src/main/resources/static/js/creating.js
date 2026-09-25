@@ -8,7 +8,7 @@ export let json;
 async function createTaskButton(event) {
     event.preventDefault();
 
-    const response = await fetch("/write", {
+    await fetch("/write", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({
@@ -19,8 +19,8 @@ async function createTaskButton(event) {
             })
     });
 
-    const lastIDfile = await fetch("/tasks/last-id");
-    const lastID = await lastIDfile.text();
+    const lastIDFile = await fetch("/tasks/last-id");
+    const lastID = await lastIDFile.text();
 
     const jsonFile = await fetch(`/tasks/query-task/${lastID}`);
     json = await jsonFile.json();

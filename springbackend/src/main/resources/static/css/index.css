@@ -33,3 +33,18 @@ footer {
     color: black;
     font-size: 70px;
 }
+
+.new-tasks {
+    margin: auto;
+    display: flex;
+    flex-direction: row;
+    gap: 70%;
+    background-image: url("/images/fundo-claro-tuffo.webp");
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.modifying {
+    color: black;
+    font-size: 50px;
+}
