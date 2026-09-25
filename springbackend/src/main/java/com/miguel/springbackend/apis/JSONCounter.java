@@ -84,7 +84,12 @@ public class JSONCounter{
         Path counterFile = Path.of("data").resolve(Path.of("counter.txt"));
         List<String> counter = counterQuery();
 
-        String adding = String.valueOf(Integer.parseInt(counter.get(counter.size() - 1)) + 1);
+        String adding = counter.getLast();
+        if (adding.trim().isEmpty()) {
+            adding = "0";
+        } else {
+            adding = String.valueOf(Integer.parseInt(adding) + 1);
+        }
 
         counter.add(adding);
 
