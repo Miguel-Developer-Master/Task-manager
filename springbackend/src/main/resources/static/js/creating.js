@@ -1,3 +1,6 @@
+import {changePage} from "./utils/ChangePage.js";
+
+console.log ("Js loaded");
 const form = document.querySelector("#create-task-form");
 const title = document.querySelector("#task-name");
 const description = document.querySelector("#task-description");
@@ -6,9 +9,10 @@ const priority = document.querySelector(".priority");
 export let json;
 
 async function createTaskButton(event) {
+    console.log("function started");
     event.preventDefault();
 
-    await fetch("/write", {
+    await fetch("/tasks/write", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({
@@ -18,16 +22,16 @@ async function createTaskButton(event) {
                 completed: false
             })
     });
+    console.log("Writted");
 
     const lastIDFile = await fetch("/tasks/last-id");
     const lastID = await lastIDFile.text();
+    console.log("Getting last ID");
+    const lastIDInteger = Number(lastID);
 
-    const jsonFile = await fetch(`/tasks/query-task/${lastID}`);
+    const jsonFile = await fetch(`/tasks/query-task/${lastIDInteger}`);
     json = await jsonFile.json();
-
-    return json;
+    console.log("Querying the task");
 }
-
-export { createTaskButton };
 
 form.addEventListener("submit", createTaskButton);

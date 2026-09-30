@@ -84,11 +84,12 @@ public class JSONCounter{
         Path counterFile = Path.of("data").resolve(Path.of("counter.txt"));
         List<String> counter = counterQuery();
 
-        String adding = counter.getLast();
-        if (adding.trim().isEmpty()) {
+        String adding = "";
+        if (counter.isEmpty()) {
             adding = "0";
         } else {
-            adding = String.valueOf(Integer.parseInt(adding) + 1);
+            int intAdding = Integer.parseInt(counter.getLast()) + 1;
+            adding = String.valueOf(intAdding);
         }
 
         counter.add(adding);
@@ -98,9 +99,9 @@ public class JSONCounter{
             String line = counter.get(i);
 
             if (i == 0) {
-                Files.writeString(counterFile, line);
+                Files.writeString(counterFile, line + "\n");
             } else {
-                Files.writeString(counterFile, line, StandardOpenOption.APPEND);
+                Files.writeString(counterFile, line + "\n", StandardOpenOption.APPEND);
             }
 
         }

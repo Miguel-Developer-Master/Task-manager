@@ -49,7 +49,6 @@ public class JSONPeopleInfo {
     }
 
     public static List<String> JSONqueryTask(int id) throws IOException {
-        Path jsonFile = Path.of("data").resolve(Path.of("people.json"));
         List<String> json = JSONquery();
         List<String> task = new ArrayList<>();
 
@@ -57,26 +56,24 @@ public class JSONPeopleInfo {
         for (int i = 0; i < json.size(); i++) {
             String line = json.get(i);
 
-            if (line.equals("\"id\": " + id)) {
-                task.add(0, json.get(i - 1));
+            if (line.contains("id") && line.contains(String.valueOf(id))) {
 
-                for (int a = 0; a < 6; a++) {
-
-                    if (a == 0) {
-                        String adding = json.get(i);
+                for (int j = -2; j < 3; j++) {
+                    if (j < 0) {
+                        String adding = json.get(i + j);
                         task.add(adding);
                     } else {
-                        String adding = json.get(i + a);
+                        String adding = json.get(i + j);
                         task.add(adding);
                     }
-
                 }
-            break;
             }
 
         }
 
-        if (task.isEmpty()) {
+        if(json.isEmpty()) {
+            throw new RuntimeException("Sorry, there is no task");
+        } else if (task.isEmpty()) {
             throw new RuntimeException("Sorry, the task wasn't found");
         } else {
             return task;
