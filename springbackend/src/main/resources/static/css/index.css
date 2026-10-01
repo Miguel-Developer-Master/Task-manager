@@ -23,7 +23,7 @@ footer {
     margin: auto;
     display: flex;
     flex-direction: row;
-    gap: 71%;
+    gap: 75%;
     background-image: url("/images/fundo-claro-tuffo.webp");
     background-repeat: no-repeat;
     background-size: cover;
@@ -34,11 +34,15 @@ footer {
     font-size: 70px;
 }
 
+#create {
+    background: none;
+    border: none;
+}
+
 .new-tasks {
     margin: auto;
     display: flex;
     flex-direction: row;
-    gap: 70%;
     background-image: url("/images/fundo-claro-tuffo.webp");
     background-repeat: no-repeat;
     background-size: cover;
@@ -47,4 +51,14 @@ footer {
 .modifying {
     color: black;
     font-size: 50px;
+}
+
+.modify {
+    gap: 500px;
+    border: none;
+    background: none;
+}
+
+.tasks-title {
+    padding-right: 150px;
 }
