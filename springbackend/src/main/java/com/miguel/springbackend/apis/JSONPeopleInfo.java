@@ -1,7 +1,10 @@
 package com.miguel.springbackend.apis;
 
+import com.miguel.springbackend.Task;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
+import tools.jackson.core.type.TypeReference;
+import tools.jackson.databind.ObjectMapper;
 
 import java.io.IOException;
 import java.nio.file.Path;
@@ -28,12 +31,17 @@ public class JSONPeopleInfo {
     }
 
     @GetMapping("/tasks/apis/query-data")
-    public List<String> JSONqueryExport() {
+    public List<Task> JSONqueryExport() {
         try {
-            List<String> json = JSONquery();
+            ObjectMapper mapper = new ObjectMapper();
+            List<Task> tasks = mapper.readValue(
+                    JSONqueryPath().toFile(),
+                    new TypeReference<List<Task>>() {}
+            );
 
-            return json;
+            return tasks;
         } catch (IOException e) {
+            e.printStackTrace();
             throw new RuntimeException(e);
         }
 
@@ -110,6 +118,7 @@ public class JSONPeopleInfo {
              */
 
         } catch (IOException e) {
+            e.printStackTrace();
             throw new RuntimeException("Sorry, this error ocurred: " + e);
         }
 
