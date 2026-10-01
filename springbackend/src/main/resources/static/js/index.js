@@ -98,3 +98,5 @@ async function showTasks() {
     }
 
 }
+
+window.addEventListener("load", showTasks);
