@@ -30,13 +30,9 @@ public class JSONWritter {
 
 
             List<Task> tasks = mapper.readValue(path.toFile(), new TypeReference<List<Task>>() {});
-            System.out.println("Path: " + path);
-            System.out.println("Tasks: " + tasks);
-            System.out.println("Task count: " + tasks.size());
 
             tasks.add(task);
             mapper.writerWithDefaultPrettyPrinter().writeValue(path.toFile(), tasks);
-            System.out.println("WRITE FINISHED");
 
         } catch (IOException e) {
             e.printStackTrace();
