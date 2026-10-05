@@ -13,7 +13,12 @@ public class PageController {
     
 
     @GetMapping("/creating")
-    public String Creating() {
+    public String creating() {
         return "creating";
+    }
+
+    @GetMapping("/see-editing")
+    public String editing() {
+        return "seedit";
     }
 }
