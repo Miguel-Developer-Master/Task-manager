@@ -1,13 +1,14 @@
+import {showDeletePopUp} from "./utils/PopUp.js";
+import {changePage} from "./utils/ChangePage.js"
+
 const createButton = document.querySelector("#create");
 const section = document.querySelector("#create-view-task");
 
 
-import {changePage} from "./utils/ChangePage.js"
 
 createButton.addEventListener("click", () => changePage("creating"));
 
 async function showTasks() {
-    console.log("showTasks started");
     const tasksList = await fetch("/tasks/apis/query-data");
     const tasks = await tasksList.json();
 
@@ -16,6 +17,7 @@ async function showTasks() {
 
         const newDiv = document.createElement("div");
         newDiv.classList.add("new-tasks");
+        newDiv.id = task.id;
 
         const newParagraph = document.createElement("p");
         newParagraph.classList.add("task-title");
@@ -31,32 +33,22 @@ async function showTasks() {
         newChangeButton.classList.add("modifyButton");
         newChangeButton.classList.add("modify");
         newChangeButton.classList.add("modifying");
-        newChangeButton.innerHTML = `<svg width="32" height="32" viewBox="0 0 32 32">
-                                    <!-- Pencil -->
+        newChangeButton.innerHTML = `<svg width="32" height="32" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                                     <path
-                                        d="M8 24L9.5 19L21 7.5L24.5 11L13 22.5L8 24Z"
-                                        fill="none"
-                                        stroke="black"
+                                        d="M2 12C2 12 5.5 5 12 5C18.5 5 22 12 22 12C22 12 18.5 19 12 19C5.5 19 2 12 2 12Z"
+                                        stroke="currentColor"
                                         stroke-width="2"
+                                        stroke-linecap="round"
                                         stroke-linejoin="round"
                                     />
-                                
-                                    <!-- Pencil tip -->
-                                    <path
-                                        d="M8 24L9.5 19L13 22.5L8 24Z"
-                                        fill="black"
-                                    />
-                                
-                                    <!-- Pencil top -->
-                                    <line
-                                        x1="19.5"
-                                        y1="9"
-                                        x2="23"
-                                        y2="12.5"
-                                        stroke="black"
+                                    <circle
+                                        cx="12"
+                                        cy="12"
+                                        r="3"
+                                        stroke="currentColor"
                                         stroke-width="2"
                                     />
-                                </svg>`;
+                                    </svg>`;
 
         const newDeleteButton = document.createElement("button");
         newDeleteButton.classList.add("delete");
@@ -95,6 +87,15 @@ async function showTasks() {
         newDiv.append(newChangeButton);
         newDiv.append(newDeleteButton);
         section.append(newDiv);
+        newChangeButton.addEventListener("click", (event) => {
+            const taskID = event.target.closest(".new-tasks").id;
+            changePage(`see-editing?id=${taskID}`);
+        });
+
+        newDeleteButton.addEventListener("click", (event) => {
+            const taskID = event.target.closest(".new-tasks").id;
+            showDeletePopUp(taskID);
+        });
     }
 
 }
