@@ -1,7 +1,9 @@
 package com.miguel.springbackend.apis;
 
 import com.miguel.springbackend.Task;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 import tools.jackson.core.type.TypeReference;
 import tools.jackson.databind.ObjectMapper;
@@ -33,9 +35,11 @@ public class JSONPeopleInfo {
     @GetMapping("/tasks/apis/query-data")
     public List<Task> JSONqueryExport() {
         try {
+            Path path = JSONqueryPath();
+
             ObjectMapper mapper = new ObjectMapper();
             List<Task> tasks = mapper.readValue(
-                    JSONqueryPath().toFile(),
+                    path.toFile(),
                     new TypeReference<List<Task>>() {}
             );
 
@@ -122,6 +126,30 @@ public class JSONPeopleInfo {
             throw new RuntimeException("Sorry, this error ocurred: " + e);
         }
 
+    }
+
+    @DeleteMapping("/tasks/delete/{id}")
+    public void deleteTask(@PathVariable int id) {
+        ObjectMapper mapper = new ObjectMapper();
+
+        try {
+
+            List<Task> tasks = mapper.readValue(
+                    JSONqueryPath().toFile(),
+                    new TypeReference<List<Task>>() {
+                    }
+            );
+
+            tasks.removeIf(task -> task.id == id);
+
+            mapper.writerWithDefaultPrettyPrinter().writeValue(
+                    JSONqueryPath().toFile(),
+                    tasks
+            );
+        } catch (IOException e) {
+            e.printStackTrace();
+            throw new RuntimeException("Sorry, this error occurred: " + e);
+        }
     }
 
 }
