@@ -105,4 +105,4 @@ and, finally:
 mvn spring-boot:run
 ```
 
-Since you do that, you can acces [localhost:8080](localhost:8080) to see the project.
+Since you do that, you can acces [localhost:8080](http://localhost:8080) to see the project.
