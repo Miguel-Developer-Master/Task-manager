@@ -14,7 +14,6 @@ async function showTasks() {
 
 
     for (const task of tasks) {
-
         const newDiv = document.createElement("div");
         newDiv.classList.add("new-tasks");
         newDiv.id = task.id;
